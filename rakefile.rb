@@ -1,7 +1,7 @@
-require './src/register'
-require './src/plugin'
-require './src/versions'
-require './src/tools'
+require './scripts/register'
+require './scripts/plugin'
+require './scripts/versions'
+require './scripts/tools'
 
 PLUGINS_DEST_FOLDER = "./plugins";
 PLUGIN_RELEASE_FOLDER = "./releases"

@@ -1,6 +1,6 @@
 require 'json'
-require './src/plugin.frontend.angular'
-require './src/plugin.frontend.notangular'
+require './scripts/plugin.frontend.angular'
+require './scripts/plugin.frontend.notangular'
 
 PLUGIN_FRONTEND_FOLDER = "render"
 PLUGIN_FRONTEND_ANGULAR_PACKAGE = "ng-package.json"

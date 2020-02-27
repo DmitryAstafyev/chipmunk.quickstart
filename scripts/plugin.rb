@@ -1,8 +1,8 @@
 require 'json'
 require 'fileutils'
-require './src/plugin.backend'
-require './src/plugin.frontend'
-require './src/tools'
+require './scripts/plugin.backend'
+require './scripts/plugin.frontend'
+require './scripts/tools'
 
 class Plugin
 

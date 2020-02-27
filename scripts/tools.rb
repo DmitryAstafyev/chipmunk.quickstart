@@ -1,4 +1,4 @@
-require './src/os'
+require './scripts/os'
 
 def copy_dist(from, to, remove = false, overwrite = true)
     if overwrite == true && File.directory?(to)
