@@ -13,7 +13,7 @@ class Plugin
     end
 
     def build
-        backend = PluginBackend.new(@path, @versions)
+        backend = PluginBackend.new(@path, @versions.get())
         if !backend.exist() 
             puts "Plugin \"#{@name}\" doesn't have backend"
         else
@@ -27,7 +27,7 @@ class Plugin
                 puts "Install backend of \"#{@name}\": FAIL"
             end
         end
-        frontend = PluginFrontend.new(@path, @versions)
+        frontend = PluginFrontend.new(@path, @versions.get())
         if !frontend.exist()
             puts "Plugin \"#{@name}\" doesn't have frontend"
         else
@@ -64,11 +64,30 @@ class Plugin
         if frontend.get_state()
             copy_dist(frontend.get_path(), "#{dest}/render")
         end
+        file_name = self.class.get_name(@name, @versions.get_hash(), "0.0.1")
+        self.class.add_info(dest, @name, "", file_name, "0.0.1", @versions.get_hash())
         return true
     end
 
-    def get_name 
+    def get_plugin_name
         return @name
+    end
+
+    def self.get_name(name, hash, version)
+        return "#{name}@#{hash}-#{version}-#{get_nodejs_platform()}.tgz"
+    end
+
+    def self.add_info(dest, name, url, file_name, version, hash)
+        info = {
+            "name" => name,
+            "file" => file_name,
+            "version" => version,
+            "hash" => hash,
+            "url" => url
+        }
+        File.open("./#{dest}/info.json","w") do |f|
+            f.write(info.to_json)
+        end
     end
 
 end

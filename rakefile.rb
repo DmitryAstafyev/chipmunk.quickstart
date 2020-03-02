@@ -30,12 +30,12 @@ task :build, [:target] do |t, args|
         putsAccent("Please define target to be built like: \"rake build[./plugins/plugin.complex]\"", true)
     end
     versions = Versions.new()
-    plugin = Plugin.new(args.target, versions.get())
+    plugin = Plugin.new(args.target, versions)
     if plugin.build()
-        puts "Plugin #{plugin.get_name()} is built SUCCESSFULLY"
+        puts "Plugin #{plugin.get_plugin_name()} is built SUCCESSFULLY"
     else
         success = false
-        puts "Fail to build plugin #{plugin.get_name()}"
+        puts "Fail to build plugin #{plugin.get_plugin_name()}"
     end
     # ...
     puts "Traget is: #{args.target}"

@@ -4,6 +4,9 @@
   "logviewer_version": "1.0.0",
   "description": "",
   "main": "./dist/main.js",
+  "logviewer": {
+    "displayName": "Terminal"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "build:watch": "tsc -p ./tsconfig.json -w",
