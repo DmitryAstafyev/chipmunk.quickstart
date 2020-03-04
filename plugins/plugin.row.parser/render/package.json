@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "ansi_up": "^4.0.4",
-    "chipmunk.client.toolkit": "^1.0.2"
+    "chipmunk.client.toolkit": "latest"
   },
   "resolutions": {
     "serialize-javascript": ">=2.1.2"

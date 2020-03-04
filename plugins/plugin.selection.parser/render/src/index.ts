@@ -32,6 +32,7 @@ export class SelectionParser extends Toolkit.SelectionParser {
      * in context menu of selection in main view.
      * @param selection { string } - selected text in main view of chipmunk
      * @param themeTypeRef { EThemeType } - name of current color theme
+     * @returns { string } - parsed string
      */
     public parse(selection: string, themeTypeRef: Toolkit.EThemeType): string {
         return (new Date(selection)).toUTCString();
@@ -53,8 +54,8 @@ if (gate === undefined) {
     console.error(`Fail to find chipmunk gate.`);
 } else {
     gate.setPluginExports({
-        // Name of property (in this case it's "selection" could be any. Chipmunk doesn't check
+        // Name of property (in this case it's "datetime" could be any. Chipmunk doesn't check
         // a name of property, but detecting a parent class.
-        selection: new SelectionParser(),
+        datetime: new SelectionParser(),
     });
 }
