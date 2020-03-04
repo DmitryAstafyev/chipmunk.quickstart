@@ -1,6 +1,6 @@
 import Logger from './env.logger';
 import * as path from 'path';
-import PluginIPCService from 'chipmunk.plugin.ipc';
+import PluginIPCService, { ServiceState } from 'chipmunk.plugin.ipc';
 import { IPCMessages } from 'chipmunk.plugin.ipc';
 import StreamsService, { IStreamInfo } from './service.streams';
 import { IForkSettings } from './process.fork';
@@ -17,19 +17,6 @@ class Plugin {
         StreamsService.on(StreamsService.Events.onStreamOpened, this._onStreamOpened);
         StreamsService.on(StreamsService.Events.onStreamClosed, this._onStreamClosed);
     }
-
-    /*
-    private _getAvailableShells(): Promise<string[]> {
-        return new Promise((resolve, reject) => {
-            EnvModule.shells().then((shells: string[]) => {
-                if (!(shells instanceof Array) || shells.length === 0) {
-                    return reject(new Error(this._logger.error(`Cannot detect available shells on OS level.`)));
-                }
-                resolve(shells);
-            });
-        });
-    }
-    */
 
     private _onIncomeRenderIPCMessage(message: IPCMessages.PluginInternalMessage, response: (res: IPCMessages.TMessage) => any) {
         switch (message.data.command) {
@@ -236,3 +223,8 @@ class Plugin {
 }
 
 const app: Plugin = new Plugin();
+
+// Notify core about plugin
+ServiceState.accept().catch((err: Error) => {
+    console.log(`Fail to notify core about plugin due error: ${err.message}`);
+});
