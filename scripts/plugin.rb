@@ -7,14 +7,15 @@ require './scripts/plugin.frontend'
 require './scripts/tools'
 
 class Plugin
-  def initialize(path, versions)
+  def initialize(path, versions, hard)
     @name = File.basename(path)
     @path = path
     @versions = versions
+    @hard = hard
   end
 
   def build
-    backend = PluginBackend.new(@path, @versions.get)
+    backend = PluginBackend.new(@path, @versions.get, @hard)
     if !backend.exist
       puts "Plugin \"#{@name}\" doesn't have backend"
     else

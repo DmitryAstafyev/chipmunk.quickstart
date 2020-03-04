@@ -5,10 +5,11 @@ require 'json'
 PLUGIN_BACKEND_FOLDER = 'process'
 
 class PluginBackend
-  def initialize(path, versions)
+  def initialize(path, versions, hard)
     @path = "#{path}/#{PLUGIN_BACKEND_FOLDER}"
     @versions = versions
     @state = false
+    @hard = hard
   end
 
   def exist
@@ -37,6 +38,7 @@ class PluginBackend
   end
 
   def install
+    self.class.clear(@path) if @hard
     Rake.cd @path do
       if !File.directory?('./node_modules')
         begin
@@ -71,6 +73,38 @@ class PluginBackend
         rescue StandardError => e
           puts e.message
           @state = nil
+          return false
+        end
+      end
+    end
+  end
+
+  def self.clear(path)
+    Rake.cd path do
+      if File.directory?('./node_modules')
+        begin
+          puts 'Clean solution'
+          Rake.sh 'rm -rf ./node_modules'
+        rescue StandardError => e
+          puts e.message
+          return false
+        end
+      end
+      if File.directory?('./dist')
+        begin
+          puts 'Drop last build'
+          Rake.sh 'rm -rf ./dist'
+        rescue StandardError => e
+          puts e.message
+          return false
+        end
+      end
+      if File.file?('./package-lock.json')
+        begin
+          puts 'Remove package-lock.json'
+          Rake.sh 'rm ./package-lock.json'
+        rescue StandardError => e
+          puts e.message
           return false
         end
       end
