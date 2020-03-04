@@ -1,10 +1,10 @@
 {
-  "name": "logviewer.plugin.transport.terminal",
+  "name": "chipmunk.helloworld.plugin.example",
   "version": "1.0.11",
   "description": "",
   "main": "./dist/main.js",
   "chipmunk": {
-    "displayName": "Terminal"
+    "displayName": "Hello World"
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
