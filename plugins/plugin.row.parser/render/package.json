@@ -22,7 +22,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "ansi_up": "^4.0.4",
+    "ansi_up": "^5.0.0",
     "chipmunk.client.toolkit": "latest"
   },
   "resolutions": {
